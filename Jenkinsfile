@@ -26,7 +26,6 @@ pipeline {
                         }
                     }
                 }
-                // echo "output=$outputClass";
             }
         }
         stage('Deploy Foo') {
