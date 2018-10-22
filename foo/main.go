@@ -7,7 +7,7 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	// my
+	// my goodness
 }
 
 func main() {
