@@ -8,9 +8,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building ${GIT_COMMIT}"
-                sh '''
-                    git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq
-                '''
+                output = sh(returnStdout: true, script: 'git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq').trim()
+                echo "output=$output";
             }
         }
         stage('Test') {
