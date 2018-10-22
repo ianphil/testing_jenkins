@@ -45,7 +45,7 @@ def sparseCheckout(sparsePath) {
   
   checkout scm: [
     $class: 'GitSCM', 
-    branches: [[name: commitHash]], 
+    branches: [[name: "${GIT_COMMIT}"]], 
     doGenerateSubmoduleConfigurations: false, 
     extensions: [[
       $class: 'SparseCheckoutPaths', 
