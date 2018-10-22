@@ -14,19 +14,29 @@ pipeline {
                     output = sh(returnStdout: true, script: 'git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq').trim()
                     output.eachLine { line ->
                         println line
+                        switch (x) {
+                            case "foo":
+                                foo = "true"
+                            case "bar":
+                                bar = "true"
+                            default:
+                                foobar = "true"
+                        }
                     }
                 }
                 // echo "output=$outputClass";
             }
         }
-        stage('Test') {
+        stage('Deploy Foo') {
+            when { environment name: 'foo', value: 'true' }
             steps {
-                echo 'Testing'
+                echo 'Deploy Foo'
             }
         }
-        stage('Deploy') {
+        stage('Deploy Bar') {
+            when { environment name: 'bar', value: 'true' }
             steps {
-                echo 'Deploying'
+                echo 'Deploy Bar'
             }
         }
     }
