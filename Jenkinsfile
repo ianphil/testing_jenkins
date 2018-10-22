@@ -9,14 +9,12 @@ pipeline {
                 script {
                     output = sh(returnStdout: true, script: 'git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq').trim()
                     if (output.contains("foo")) {
-                        println "Foo"
+                        env.foo = "true"
                     }
                     if (output.contains("bar")) {
-                        println "Bar"
+                        env.bar = "true"
                     }
                 }
-
-                // echo "${env.output}"
             }
         }
         stage('Deploy Foo') {
