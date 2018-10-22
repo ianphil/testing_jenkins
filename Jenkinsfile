@@ -14,7 +14,7 @@ pipeline {
                     output = sh(returnStdout: true, script: 'git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq').trim()
                     output.eachLine { line ->
                         println line
-                        switch (x) {
+                        switch (line) {
                             case "foo":
                                 env.foo = "true"
                             case "bar":
