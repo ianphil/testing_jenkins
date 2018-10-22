@@ -10,12 +10,7 @@ pipeline {
                     output = sh(returnStdout: true, script: 'git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq').trim()
                     output.eachLine { line ->
                         println line
-                        if (line == "foo"){
-                            env.foo = "true"
-                        }
-                        if (line == "bar"){
-                            env.bar = "true"
-                        }
+                        
                     }
                 }
             }
