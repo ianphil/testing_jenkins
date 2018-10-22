@@ -7,10 +7,16 @@ pipeline {
             steps {
                 echo "Building ${GIT_COMMIT}"
                 script {
-                    env.output = sh(returnStdout: true, script: 'git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq').trim()
+                    output = sh(returnStdout: true, script: 'git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq').trim()
+                    if (output.contains("foo")) {
+                        println "Foo"
+                    }
+                    if (output.contains("bar")) {
+                        println "Bar"
+                    }
                 }
 
-                echo "${env.output}"
+                // echo "${env.output}"
             }
         }
         stage('Deploy Foo') {
