@@ -17,8 +17,10 @@ pipeline {
                         switch (line) {
                             case "foo":
                                 env.foo = "true"
+                                break
                             case "bar":
                                 env.bar = "true"
+                                break
                             default:
                                 env.foobar = "true"
                         }
