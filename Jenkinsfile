@@ -12,9 +12,9 @@ pipeline {
                 echo "Building ${GIT_COMMIT}"
                 script {
                     output = sh(returnStdout: true, script: 'git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq').trim()
-                    output.getClass()
+                    class = output.getClass()
                 }
-                // echo "output=$output";
+                // echo "output=$class";
             }
         }
         stage('Test') {
