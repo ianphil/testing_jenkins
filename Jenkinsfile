@@ -16,11 +16,11 @@ pipeline {
                         println line
                         switch (x) {
                             case "foo":
-                                foo = "true"
+                                env.foo = "true"
                             case "bar":
-                                bar = "true"
+                                env.bar = "true"
                             default:
-                                foobar = "true"
+                                env.foobar = "true"
                         }
                     }
                 }
