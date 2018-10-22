@@ -7,7 +7,7 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	// test out of sample - diff test - test - diff - diff - diff
+	// test
 }
 
 func main() {
