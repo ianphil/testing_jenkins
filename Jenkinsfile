@@ -2,10 +2,6 @@
 
 pipeline {
     agent any
-    environment {
-        GIT_REPO = 'git@github.com:iphilpot/testing_jenkins.git'
-        CREDENTIALSID = 'JenkinsSSH'
-    }
     stages {
         stage('Build') {
             steps {
@@ -14,15 +10,11 @@ pipeline {
                     output = sh(returnStdout: true, script: 'git diff --name-only $GIT_PREVIOUS_COMMIT $GIT_COMMIT | cut -d "/" -f 1 | sort | uniq').trim()
                     output.eachLine { line ->
                         println line
-                        switch (line) {
-                            case "foo":
-                                env.foo = "true"
-                                break
-                            case "bar":
-                                env.bar = "true"
-                                break
-                            default:
-                                env.foobar = "true"
+                        if (line == "foo"){
+                            env.foo = "true"
+                        }
+                        if (line == "bar"){
+                            env.bar = "true"
                         }
                     }
                 }
@@ -41,26 +33,4 @@ pipeline {
             }
         }
     }
-}
-
-def sparseCheckout() {
-  def scmVars = checkout scm
-  def commitHash = scmVars.GIT_COMMIT
-  
-  checkout scm: [
-    $class: 'GitSCM', 
-    branches: [[name: commitHash]], 
-    doGenerateSubmoduleConfigurations: false, 
-    extensions: [[
-      $class: 'SparseCheckoutPaths', 
-      sparseCheckoutPaths: [[
-        path: 'bar'
-      ]]
-    ]], 
-      submoduleCfg: [], 
-      userRemoteConfigs: [[
-        credentialsId: "${CREDENTIALSID}", 
-        url: "${GIT_REPO}"
-      ]]
-  ]
 }
