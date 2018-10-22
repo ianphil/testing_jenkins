@@ -40,9 +40,6 @@ pipeline {
 }
 
 def sparseCheckout(sparsePath) {
-  def scmVars = checkout scm
-  def commitHash = scmVars.GIT_COMMIT
-  
   checkout scm: [
     $class: 'GitSCM', 
     branches: [[name: "${GIT_COMMIT}"]], 
